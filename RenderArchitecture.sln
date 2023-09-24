@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{C13BB5E5-6150-44A9-835F-875AF3950CE9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Editor", "Editor", "{CEBB0FE0-98B1-4BA9-8071-035F6A5E54DD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Editor", "Source\Editor\Editor.csproj", "{C7B53BAC-6553-4769-AB93-DF8A335ED51B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_items", "_items", "{1B75D44C-516D-4935-8449-490CF12D18FC}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CEBB0FE0-98B1-4BA9-8071-035F6A5E54DD} = {C13BB5E5-6150-44A9-835F-875AF3950CE9}
+		{C7B53BAC-6553-4769-AB93-DF8A335ED51B} = {CEBB0FE0-98B1-4BA9-8071-035F6A5E54DD}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C7B53BAC-6553-4769-AB93-DF8A335ED51B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7B53BAC-6553-4769-AB93-DF8A335ED51B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7B53BAC-6553-4769-AB93-DF8A335ED51B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7B53BAC-6553-4769-AB93-DF8A335ED51B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
