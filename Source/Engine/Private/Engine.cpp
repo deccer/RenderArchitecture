@@ -49,11 +49,14 @@ void Engine_Run()
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
     glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GLFW_TRUE);
 
-    auto windowWidth = 1920;
-    auto windowHeight = 1080;
-
     auto primaryMonitor = glfwGetPrimaryMonitor();
     auto videoMode = glfwGetVideoMode(primaryMonitor);
+
+    auto screenWidth = videoMode->width;
+    auto screenHeight = videoMode->height;
+
+    auto windowWidth = static_cast<int32_t>(screenWidth * 0.9f);
+    auto windowHeight = static_cast<int32_t>(screenHeight * 0.9f);
 
     g_EngineState.Window = glfwCreateWindow(windowWidth, windowHeight, "C++ Window", nullptr, nullptr);
     if (g_EngineState.Window == nullptr)
@@ -63,9 +66,6 @@ void Engine_Run()
         return;
     }
     std::cout << "C++: Window Created\n";
-
-    auto screenWidth = videoMode->width;
-    auto screenHeight = videoMode->height;
 
     int32_t monitorLeft = 0;
     int32_t monitorTop = 0;
