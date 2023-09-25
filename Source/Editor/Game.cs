@@ -1,30 +1,10 @@
 using System;
-using System.Runtime.InteropServices;
 using Editor.Native;
 
 namespace Editor;
 
-[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-public delegate int InitializeDelegate();
-
-[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-public delegate int LoadDelegate();
-
-[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-public delegate void UpdateDelegate(float deltaTime);
-
-[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-public delegate void FixedUpdateDelegate(float deltaTime);
-
 internal sealed class Game : IGame
 {
-    private readonly InitializeDelegate _initializeDelegate;
-    private readonly LoadDelegate _loadDelegate;
-    private readonly UpdateDelegate _updateDelegate;
-    private readonly FixedUpdateDelegate _fixedUpdateDelegate;
-
-    private static int _counter;
-
     public Game()
     {
     }
@@ -55,17 +35,17 @@ internal sealed class Game : IGame
         return 1;
     }
 
-    public static int Load()
+    public int Load()
     {
         Console.WriteLine("C# Load");
         return 1;
     }
 
-    public static void Update(float deltaTime)
+    public void Update(float deltaTime)
     {
-        /*
+        
         Console.WriteLine("C# Update");
-
+        /*
         _counter++;
         if (_counter == 100)
         {
@@ -74,7 +54,7 @@ internal sealed class Game : IGame
         */
     }
 
-    public static void FixedUpdate(float deltaTime)
+    public void FixedUpdate(float deltaTime)
     {
         Console.WriteLine("C# FixedUpdate");
     }
