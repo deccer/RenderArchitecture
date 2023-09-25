@@ -19,11 +19,11 @@ target_link_libraries(Engine PRIVATE glad glfw stb_image)
 if (WIN32)
 add_custom_command(
     TARGET Engine POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_BINARY_DIR}/Engine.dll ${CMAKE_SOURCE_DIR}/Source/Editor/bin/Debug/net7.0/runtimes/win-x64/native VERBATIM
+    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_BINARY_DIR}/Debug/Engine.dll ${CMAKE_SOURCE_DIR}/Source/Editor/bin/Debug/net7.0/runtimes/win-x64/native/ VERBATIM
     )
 else()
 add_custom_command(
     TARGET Engine POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_BINARY_DIR}/libEngine.so ${CMAKE_SOURCE_DIR}/Source/Editor/bin/Debug/net7.0/runtimes/linux-x64/native VERBATIM
+    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_BINARY_DIR}/libEngine.so ${CMAKE_SOURCE_DIR}/Source/Editor/bin/Debug/net7.0/runtimes/linux-x64/native/ VERBATIM
     )
 endif (WIN32)
