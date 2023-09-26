@@ -33,6 +33,7 @@ internal sealed class Game : IGame
 
     private int Initialize()
     {
+        Engine.SetWindowTitle("Render Architecture Experiment");
         Console.WriteLine("C# Initialize");
         return 1;
     }

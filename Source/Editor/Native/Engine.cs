@@ -48,6 +48,11 @@ public static partial class Engine
     {
         Engine_SetWindowClose();
     }
+
+    public static void SetWindowTitle(string windowTitle)
+    {
+        Engine_SetWindowTitle(windowTitle);
+    }
     
     private static string GetLibraryName()
     {

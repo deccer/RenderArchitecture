@@ -14,4 +14,7 @@ public static partial class Engine
 
     [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
     private static extern void Engine_SetWindowClose();
+
+    [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+    private static extern void Engine_SetWindowTitle([MarshalAs(UnmanagedType.LPStr)] string windowTitle);
 }
