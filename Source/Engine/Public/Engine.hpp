@@ -28,16 +28,10 @@ typedef struct EngineState
 
 EngineState* GetEngineState();
 
-#if __cplusplus
 extern "C"
 {
-#endif
-
-int32_t ENGINE_API Engine_Initialize(EngineDescriptor engineDescriptor);
-void ENGINE_API Engine_Run();
-void ENGINE_API Engine_SetWindowClose();
-
-#if __cplusplus
+    int32_t ENGINE_API Engine_Initialize(EngineDescriptor engineDescriptor);
+    void ENGINE_API Engine_Run();
+    void ENGINE_API Engine_SetWindowClose();
+    void ENGINE_API Engine_SetWindowTitle(const char* windowTitle);
 }
-#endif
-

@@ -57,8 +57,8 @@ void Engine_Run()
     auto screenWidth = videoMode->width;
     auto screenHeight = videoMode->height;
 
-    auto windowWidth = static_cast<int32_t>(screenWidth * 0.9f);
-    auto windowHeight = static_cast<int32_t>(screenHeight * 0.9f);
+    auto windowWidth = static_cast<int32_t>(screenWidth * 0.8f);
+    auto windowHeight = static_cast<int32_t>(screenHeight * 0.8f);
 
     g_EngineState.Window = glfwCreateWindow(windowWidth, windowHeight, "C++ Window", nullptr, nullptr);
     if (g_EngineState.Window == nullptr)
@@ -128,4 +128,9 @@ void Engine_Run()
 void Engine_SetWindowClose()
 {
     glfwSetWindowShouldClose(g_EngineState.Window, GLFW_TRUE);
+}
+
+void Engine_SetWindowTitle(const char* windowTitle)
+{
+    glfwSetWindowTitle(g_EngineState.Window, windowTitle);
 }
