@@ -3,8 +3,13 @@ project(Engine)
 
 find_package(OpenGL REQUIRED)
 
-#add_custom_target(CopyEngineLibrary ALL COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_BINARY_DIR}/Debug/Engine.dll ${CMAKE_SOURCE_DIR}/Source/Editor/bin/Debug/net7.0/runtimes/win-x64/native)   
-#add_custom_target(CopyEngineLibraryPdb ALL COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_BINARY_DIR}/Debug/Engine.pdb ${CMAKE_SOURCE_DIR}/Source/Editor/bin/Debug/net7.0/runtimes/win-x64/native)   
+if (WIN32)
+    set(EngineTarget x64)
+elseif (UNIX)
+    set(EngineTarget lib64)
+else()
+    message(FATAL_ERROR "Unknown Target!")
+endif()
 
 add_library(Engine SHARED
 
@@ -12,18 +17,27 @@ add_library(Engine SHARED
     Private/Engine.cpp
 )
 
+set_target_properties(Engine
+    PROPERTIES
+    ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/Lib/${EngineTarget}"
+    LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/Lib/${EngineTarget}"
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/Lib/${EngineTarget}"
+)
+
+
 target_include_directories(Engine PRIVATE Private)
 target_include_directories(Engine PUBLIC Public)
 target_link_libraries(Engine PRIVATE glad glfw stb_image)
 
-if (WIN32)
-add_custom_command(
-    TARGET Engine POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_BINARY_DIR}/Debug/Engine.dll ${CMAKE_SOURCE_DIR}/Source/Editor/bin/Debug/net8.0/runtimes/win-x64/native/ VERBATIM
-    )
-else()
-add_custom_command(
-    TARGET Engine POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_BINARY_DIR}/libEngine.so ${CMAKE_SOURCE_DIR}/Source/Editor/bin/Debug/net8.0/runtimes/linux-x64/native/ VERBATIM
-    )
-endif (WIN32)
+
+# if (WIN32)
+# add_custom_command(
+#     TARGET Engine POST_BUILD
+#     COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_BINARY_DIR}/Debug/Engine.dll ${CMAKE_SOURCE_DIR}/Lib/win-x64/ VERBATIM
+#     )
+# else()
+# add_custom_command(
+#     TARGET Engine POST_BUILD
+#     COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_BINARY_DIR}/libEngine.so ${CMAKE_SOURCE_DIR}/Lib/linux-x64/ VERBATIM
+#     )
+# endif (WIN32)
