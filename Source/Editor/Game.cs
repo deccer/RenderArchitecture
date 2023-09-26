@@ -13,10 +13,12 @@ internal sealed class Game : IGame
     {
         var engineDescriptor = new Engine.EngineDescriptor
         {
-            InitializeDelegate = Initialize,
-            LoadDelegate = Load,
-            UpdateDelegate = Update,
-            FixedUpdateDelegate = FixedUpdate
+            OnInitialize = Initialize,
+            OnLoad = Load,
+            OnUpdate = Update,
+            OnFixedUpdate = FixedUpdate,
+            OnRender = Render,
+            OnUnload = Unload
         };
 
         if (!Engine.Initialize(ref engineDescriptor))
@@ -29,22 +31,22 @@ internal sealed class Game : IGame
         Engine.Terminate();
     }
 
-    public int Initialize()
+    private int Initialize()
     {
         Console.WriteLine("C# Initialize");
         return 1;
     }
 
-    public int Load()
+    private int Load()
     {
         Console.WriteLine("C# Load");
         return 1;
     }
 
-    public void Update(float deltaTime)
+    private void Update(float deltaTime)
     {
         
-        Console.WriteLine("C# Update");
+        Console.WriteLine("C#: Update");
         /*
         _counter++;
         if (_counter == 100)
@@ -54,8 +56,18 @@ internal sealed class Game : IGame
         */
     }
 
-    public void FixedUpdate(float deltaTime)
+    private void FixedUpdate(float deltaTime)
     {
-        Console.WriteLine("C# FixedUpdate");
+        Console.WriteLine("C#: FixedUpdate");
+    }
+
+    private void Render(float deltaTime)
+    {
+
+    }
+
+    private void Unload()
+    {
+        Console.WriteLine("C#: Unload");
     }
 }

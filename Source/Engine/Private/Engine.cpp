@@ -31,10 +31,12 @@ int32_t Engine_Initialize(EngineDescriptor engineDescriptor)
 
     g_EngineState.Window = nullptr;
 
-    g_EngineState.Descriptor.Initialize = engineDescriptor.Initialize;
-    g_EngineState.Descriptor.Load = engineDescriptor.Load;
-    g_EngineState.Descriptor.Update = engineDescriptor.Update;
-    g_EngineState.Descriptor.FixedUpdate = engineDescriptor.FixedUpdate;
+    g_EngineState.Descriptor.OnInitialize = engineDescriptor.OnInitialize;
+    g_EngineState.Descriptor.OnLoad = engineDescriptor.OnLoad;
+    g_EngineState.Descriptor.OnUpdate = engineDescriptor.OnUpdate;
+    g_EngineState.Descriptor.OnFixedUpdate = engineDescriptor.OnFixedUpdate;
+    g_EngineState.Descriptor.OnRender = engineDescriptor.OnRender;
+    g_EngineState.Descriptor.OnUnload = engineDescriptor.OnUnload;
 
     return 1;
 }
@@ -88,26 +90,36 @@ void Engine_Run()
     glfwMakeContextCurrent(g_EngineState.Window);
     gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
     
-    if (g_EngineState.Descriptor.Initialize() == 0)
+    if (g_EngineState.Descriptor.OnInitialize() == 0)
     {
         printf("C++: Not Initialized\n");
         return;
     }
     std::cout << "C++: Initialized\n";
 
-    if (g_EngineState.Descriptor.Load() == 0)
+    if (g_EngineState.Descriptor.OnLoad() == 0)
     {
       return;
     }
     std::cout << "C++: Loaded\n";
 
+    auto currentTime = glfwGetTime();
+    auto previousTime = currentTime;
+
     while (!glfwWindowShouldClose(g_EngineState.Window))
     {
         glfwPollEvents();
-        g_EngineState.Descriptor.Update(0.01f);
+        currentTime = glfwGetTime();
+        auto deltaTime = static_cast<float>(currentTime - previousTime);
+        previousTime = currentTime;
+
+        g_EngineState.Descriptor.OnUpdate(deltaTime);
+        g_EngineState.Descriptor.OnRender(deltaTime);
 
         glfwSwapBuffers(g_EngineState.Window);
     }
+
+    g_EngineState.Descriptor.OnUnload();
 
     glfwDestroyWindow(g_EngineState.Window);
     g_EngineState.Window = nullptr;

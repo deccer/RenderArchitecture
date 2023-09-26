@@ -5,17 +5,18 @@
 
 struct GLFWwindow;
 
-using InitializeDelegate =  int (ENGINE_CALL *)();
-using LoadDelegate = int (ENGINE_CALL *)();
-using UpdateDelegate = void (ENGINE_CALL *)(float deltaTime);
-using FixedUpdateDelegate = void (ENGINE_CALL *)(float deltaTime);
+using EventHandler =  void (ENGINE_CALL *)();
+using BoolEventHandler = int (ENGINE_CALL *)();
+using DeltaTimeHandler = void (ENGINE_CALL *)(float deltaTime);
 
 typedef struct EngineDescriptor
 {
-    InitializeDelegate Initialize;
-    LoadDelegate Load;
-    UpdateDelegate Update;
-    FixedUpdateDelegate FixedUpdate; 
+    BoolEventHandler OnInitialize;
+    BoolEventHandler OnLoad;
+    DeltaTimeHandler OnUpdate;
+    DeltaTimeHandler OnFixedUpdate; 
+    DeltaTimeHandler OnRender;
+    EventHandler OnUnload;
 } EngineDescriptor;
 
 typedef struct EngineState
